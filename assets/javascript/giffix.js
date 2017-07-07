@@ -7,7 +7,7 @@ var topics = ["Border Collie", "Golden Retriever", "Labrador Retriever",
 
 function displayDog() {
 
-
+//ajax call to search giphy images
     var dog = $(this).attr("data-dog");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + dog + "&api_key=dc6zaTOxFJmzC&limit=10";
 
@@ -18,6 +18,7 @@ function displayDog() {
         console.log(queryURL);
         console.log(response);
 
+//display top 10 images from giphy and prepend rating underneath
     var results = response.data;
     for (var i = 0; i < results.length; i++) {
         var dogDiv = $("<div class='item'>");
@@ -38,14 +39,14 @@ function displayDog() {
 function makeButtons() {
     $("#buttons").empty();
     for (var i = 0; i < topics.length; i++) {
-        var newBut = $("<button class='btn btn-danger'>");
+        var newBut = $("<button class='btn'>");
         newBut.addClass("dog");
         newBut.attr("data-dog", topics[i]);
         newBut.text(topics[i]);
         $("#buttons").append(newBut);
         }
 }
-
+//add new button for input
 $("#add_Dog").on("click", function(event){
     event.preventDefault();
     var dog = $("#dogInput").val().trim();
@@ -54,8 +55,9 @@ $("#add_Dog").on("click", function(event){
     makeButtons();
 
 });
-
+//make all the buttons on the page with "dog" as the class respond 
+//to click events
 $(document).on("click", ".dog", displayDog);
 
-      // Calling the renderButtons function to display the intial buttons
+      // calling makeButtons function to display the intial buttons
       makeButtons();

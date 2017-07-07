@@ -1,6 +1,7 @@
 .navbar {
     color: white;
-    background-color: blue;
+    background-color: #660066;
+    height: 100px;
 }
 
 img {
@@ -26,4 +27,12 @@ label {
 
 #add_Dog {
     margin-left: 25px;
+}
+
+.btn, .btn:hover, .btn:active, .btn:focus {
+    background-color: #cc0066;
+    color: white;
+    padding: 10px;
+    margin-left: 25px;
+     
 }
