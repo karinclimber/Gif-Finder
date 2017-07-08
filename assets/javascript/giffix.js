@@ -18,21 +18,34 @@ function displayDog() {
         console.log(queryURL);
         console.log(response);
 
-//display top 10 images from giphy and prepend rating underneath
-    var results = response.data;
-    for (var i = 0; i < results.length; i++) {
-        var dogDiv = $("<div class='item'>");
-        var rating = results[i].rating;
-        var d = $("<p>").text("Rating: " + rating);
-        var dogImage = $("<img>");
-        dogImage.attr("src", results[i].images.fixed_height.url);
-        dogDiv.append(d);
-        dogDiv.prepend(dogImage);
+        for (i = 0 ; i < 10 ; i++){
+        $("#gifView").append('<img src="' 
+                    + response.data[i].images.fixed_height_still.url 
+                    +'" data-still="' + response.data[i].images.fixed_height_still.url
+                    + '" data-animate="' + response.data[i].images.fixed_height.url 
+                    + '" data-state="still" alt="gif-' + (i + 1) 
+                    + '" class="gif-it img-responsive img-thumbnail">');
 
-        $("#gifView").prepend(dogDiv);
-    }
-    });    
-};
+                $("#gifView").append('<p>Rating: ' + response.data[i].rating + '</p>');
+            };
+        });
+    };
+
+    //function - animate gif on click
+    $("body").on("click", ".gif-it", function() {
+
+        var state = $(this).attr("data-state");
+
+        if (state === "still"){
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate");
+        } else {
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+        }
+    });
+
+
 
 //dynamically create buttons for array
 
